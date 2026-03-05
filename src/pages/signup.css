@@ -1,4 +1,4 @@
-.signup{
+.signupDiv{
     display: flex;
     min-height: 100vh;
     align-items: center;
@@ -25,7 +25,6 @@
 .signup-form{
   flex: 1;
   max-width: 500px;
-  max-height: 900px;
   background: white;
   padding: 50px;
   border-radius: 10px;
@@ -45,9 +44,16 @@
   font-size: xx-large;
   color: #2a7edd;
 }
-.signup-form p {
+.signup-form .pDiv {
   margin-bottom: 20px;
   color: #666;
+}
+.signup-group input.errorInput {
+  border: 1px solid red;
+}
+
+.signup-group input.errorInput:focus {
+  border-color: red;
 }
 .form-group {
   display: flex;
