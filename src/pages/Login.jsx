@@ -68,24 +68,19 @@ navigate("/");
   return (
     <form onSubmit={onSubmit}>
     <div className="login">
-          <div className="login-image">
-            <img src="./login.jpg" alt="login image" />
-          </div>
           <div className="login-form">
-            <div className="loginHome"><Link to="/">  🏠Home</Link></div>
-            <p className="pClass">Sign In</p>
+            <div className="login-logo"><Link to="/">CINE<span>VAULT</span></Link></div>
+            <p className="pClass">Welcome back! Sign in to continue.</p>
             <div className="login-group">
               <label htmlFor="email">
-                Email:
               </label>
-              <input type="email"  className={formError.email ? "errorInput" : ""} id="email" value={formValue.email} onChange={(e)=>{setFormValue({...formValue, email:e.target.value})}}/>
+              <input type="email"  className={formError.email ? "errorInput" : ""} id="email" value={formValue.email} onChange={(e)=>{setFormValue({...formValue, email:e.target.value})}} placeholder="Email"/>
               {formError.email && <p className="errorDiv">{formError.email}</p>}
             </div>
             <div className="login-group">
               <label htmlFor="password">
-                 Password:
               </label>
-              <input type="password" className={formError.password ? "errorInput" : ""} id="password" value={formValue.password} onChange={(e)=>{setFormValue({...formValue, password:e.target.value})}} />
+              <input type="password" className={formError.password ? "errorInput" : ""} id="password" value={formValue.password} onChange={(e)=>{setFormValue({...formValue, password:e.target.value})}} placeholder="Password"/>
               {formError.password && <p className="errorDiv">{formError.password}</p>}
             </div>
               <button type="submit" className="login-btn">Login</button>

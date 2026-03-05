@@ -103,103 +103,91 @@ function Signup() {
     navigate("/login");
   }
   return (
-    <form onSubmit={onSubmitRegister}>
-      <div className="signupDiv">
-        <div className="signup-image">
-          <img src="./login.jpg" alt="Register image" />
+  <form onSubmit={onSubmitRegister}>
+    <div className="signupDiv">
+      <div className="signup-form">
+
+        <div className="formLink">
+          <Link to="/">CINE<span>VAULT</span></Link>
         </div>
-        <div className="signup-form">
-          <div className="formLink">
-            <Link to="/"> 🏠Home</Link>
-          </div>
-          <h2>Sign Up</h2>
-          <p className="pDiv">Create your account in a seconds</p>
-          <div className="form-group">
-            <label htmlFor="name">Full Name:</label>
-            <input
-              type="text"
-              id="name"
-              className={formError.name ? "errorInput" : ""}
-              value={formValue.name}
-              onChange={(e) => {
-                setFormValue({ ...formValue, name: e.target.value });
-              }}
-              placeholder={"eg.Ram Prasad Koirala"}
-            />
-            {formError.name && <p className="errorDiv">{formError.name}</p>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email Address:</label>
-            <input
-              type="email"
-              id="email"
-              className={formError.email ? "errorInput" : ""}
-              value={formValue.email}
-              onChange={(e) => {
-                setFormValue({ ...formValue, email: e.target.value });
-              }}
-              placeholder="eg.example@gmail.com"
-            />
-            {formError.email && <p className="errorDiv">{formError.email}</p>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="num">Phone Number:</label>
-            <input
-              type="tel"
-              id="num"
-              className={formError.phone ? "errorInput" : ""}
-              value={formValue.phone}
-              onChange={(e) => {
-                setFormValue({ ...formValue, phone: e.target.value });
-              }}
-              placeholder="98xxxxxxxx"
-            />
-            {formError.phone && <p className="errorDiv">{formError.phone}</p>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Create Password:</label>
-            <input
-              type="password"
-              id="password"
-              className={formError.createPassword ? "errorInput" : ""}
-              value={formValue.createPassword}
-              onChange={(e) => {
-                setFormValue({ ...formValue, createPassword: e.target.value });
-              }}
-              placeholder="********"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirm_password">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirm_password"
-              className={formError.confirmPassword ? "errorInput" : ""}
-              value={formValue.confirmPassword}
-              onChange={(e) => {
-                setFormValue({ ...formValue, confirmPassword: e.target.value });
-              }}
-              placeholder="********"
-            />
-            {formError.confirmPassword && <p className="errorDiv">{formError.confirmPassword}</p>}
-          </div>
-          <div className="checkbox-group">
-            <input type="checkbox" id="terms" />
-            <label htmlFor="terms">
-              I agree to the terms and privacy policy
-            </label>
-            {formError.terms && <p className="errorDiv">{formError.terms}</p>}
-          </div>
-          <button type="submit" className="signup-btn">
-            Create an account
-          </button>
-          <div className="signupLink">
-            <Link to="/login">Already Have an Account</Link>
-          </div>
+        <p className="pDiv">Create your account to get started.</p>
+
+        <div className="form-group">
+          <input
+            type="text"
+            id="name"
+            className={formError.name ? "errorInput" : ""}
+            value={formValue.name}
+            onChange={(e) => setFormValue({ ...formValue, name: e.target.value })}
+            placeholder="Full Name"
+          />
+          {formError.name && <p className="errorDiv">{formError.name}</p>}
         </div>
+
+        <div className="form-group">
+          <input
+            type="email"
+            id="email"
+            className={formError.email ? "errorInput" : ""}
+            value={formValue.email}
+            onChange={(e) => setFormValue({ ...formValue, email: e.target.value })}
+            placeholder="Email Address"
+          />
+          {formError.email && <p className="errorDiv">{formError.email}</p>}
+        </div>
+
+        <div className="form-group">
+          <input
+            type="tel"
+            id="num"
+            className={formError.phone ? "errorInput" : ""}
+            value={formValue.phone}
+            onChange={(e) => setFormValue({ ...formValue, phone: e.target.value })}
+            placeholder="Phone Number (98xxxxxxxx)"
+          />
+          {formError.phone && <p className="errorDiv">{formError.phone}</p>}
+        </div>
+
+        <div className="form-group">
+          <input
+            type="password"
+            id="password"
+            className={formError.createPassword ? "errorInput" : ""}
+            value={formValue.createPassword}
+            onChange={(e) => setFormValue({ ...formValue, createPassword: e.target.value })}
+            placeholder="Create Password"
+          />
+          {formError.createPassword && <p className="errorDiv">{formError.createPassword}</p>}
+        </div>
+
+        <div className="form-group">
+          <input
+            type="password"
+            id="confirm_password"
+            className={formError.confirmPassword ? "errorInput" : ""}
+            value={formValue.confirmPassword}
+            onChange={(e) => setFormValue({ ...formValue, confirmPassword: e.target.value })}
+            placeholder="Confirm Password"
+          />
+          {formError.confirmPassword && <p className="errorDiv">{formError.confirmPassword}</p>}
+        </div>
+
+        <div className="checkbox-group">
+          <input type="checkbox" id="terms" />
+          <label htmlFor="terms">I agree to the terms and privacy policy</label>
+          {formError.terms && <p className="errorDiv">{formError.terms}</p>}
+        </div>
+
+        <button type="submit" className="signup-btn">Create an Account</button>
+
+        <div className="signupLink">
+          Already have an account? <Link to="/login">Sign In</Link>
+        </div>
+
       </div>
-    </form>
-  );
+    </div>
+  </form>
+);
 }
 
 export default Signup;

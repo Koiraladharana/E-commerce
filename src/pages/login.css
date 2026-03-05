@@ -1,74 +1,75 @@
-.login{
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: space-between;
-    background: #f4f6f9;
-    padding: 20px;
-    gap: 10px;
-    box-sizing: border-box;
-}
-.login-image{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.login-image img {
-  max-width: 600px;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-
-}
-.login-form{
-  flex: 1;
-  max-width: 400px;
-  max-height: 500px;
-  background: white;
-  padding: 50px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+.login {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;  
+  background: radial-gradient(ellipse at center, #1a1200 0%, var(--black) 70%);
+  padding: 20px;
   box-sizing: border-box;
-  margin-right: 50px;
 }
-.login-form .pClass{
-    text-align: center;
-    color: #2a7edd;
-    font-size: larger;
-    font-weight: bolder;
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  min-height: 380px;
+  background: var(--dark);
+  padding: 2rem 2.5rem;      
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  margin-right: 15px;
+  margin-left: 15px;
 }
-.loginHome{
-    text-align: center;
-    margin-bottom: 20px;
+
+.login-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+  text-align: center;
 }
-.loginHome a{
-    text-decoration: none;
-    color: inherit;
+
+.login-logo span { 
+  color: var(--red); 
 }
+.login-logo a { 
+  text-decoration: none; 
+  color: var(--gold);
+ }
+
+.pClass {
+  color: var(--gray);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  text-align: center;        
+}
+
 .login-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;      
   box-sizing: border-box;
+  min-height: 72px;
 }
 
-.login-group label {
-  margin-bottom: 5px;
-  font-weight: bolder;
-  box-sizing: border-box;
-}
 .login-group input {
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 0.9rem;
   transition: 0.3s;
   box-sizing: border-box;
+  width: 100%;
 }
+
 .login-group input:focus {
   outline: none;
-  border-color: #2a7edd;
+  border-color: var(--gold);
 }
+
 .login-group input.errorInput {
   border: 1px solid red;
 }
@@ -76,48 +77,49 @@
 .login-group input.errorInput:focus {
   border-color: red;
 }
+
+.errorDiv {
+  color: red;
+  font-size: 0.78rem;        /* ✅ smaller so it fits neatly */
+  margin-top: 4px;
+  padding-left: 2px;
+  min-height: 18px;          /* ✅ always reserves space even when empty */
+}
+
 .login-btn {
   width: 100%;
-  padding: 12px;
-  background: #4a90e2;
-  color: white;
+  padding: 11px;
+  background: #f5c518;
+  color: #000;               /* ✅ black text on gold looks better */
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
   box-sizing: border-box;
   transition: 0.3s;
 }
 
-.login-btn:hover {
-  background: #357abd;
-}
-.loginLink{
-    text-align: center;
-    margin-top: 15px;
-}
-.errorDiv{
-  color: red;
+.login-btn:hover { background: #c9a112; }
+
+.loginLink {
   text-align: center;
+  margin-top: 1rem;
+  color: var(--gray);
+  font-size: 0.85rem;
 }
 
+.loginLink a {
+  text-decoration: none;
+  color: #c9a112;
+  font-weight: bold;
+}
 
+/* RESPONSIVE */
 @media (max-width: 700px) {
-  .login {
-    flex-direction: column;
-    padding: 30px 20px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .login-image {
-    display: none;
-  }
-
   .login-form {
-    width: 100%;
-    max-width: 350px;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding: 1.5rem;
+    max-width: 100%;
   }
 }
