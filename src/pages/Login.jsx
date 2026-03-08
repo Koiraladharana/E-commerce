@@ -54,14 +54,10 @@ if (!matchedUser) {
   return;
 }
 
-alert("Login Successful!");
+localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+
 setFormValue({ email: "", password: "" });
 navigate("/");
-
-     setFormValue({
-    email: "",
-    password: "",
-  });
 
   }
 
@@ -69,7 +65,7 @@ navigate("/");
     <form onSubmit={onSubmit}>
     <div className="login">
           <div className="login-form">
-            <div className="login-logo"><Link to="/">CINE<span>VAULT</span></Link></div>
+            <div className="login-logo"><Link to="/">Movie<span>Fetch</span></Link></div>
             <p className="pClass">Welcome back! Sign in to continue.</p>
             <div className="login-group">
               <label htmlFor="email">

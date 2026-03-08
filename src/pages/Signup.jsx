@@ -108,7 +108,7 @@ function Signup() {
       <div className="signup-form">
 
         <div className="formLink">
-          <Link to="/">CINE<span>VAULT</span></Link>
+          <Link to="/">Movie<span>Fetch</span></Link>
         </div>
         <p className="pDiv">Create your account to get started.</p>
 
