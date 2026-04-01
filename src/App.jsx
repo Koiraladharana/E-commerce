@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { Children } from "react";
 import Favorites from "./pages/Favorites";
+import Footer from "./components/Footer";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     {
       path: "/favorites",
       element: <Favorites />
+    },
+    {
+      path: "/footer",
+      element: <Footer />
     }
   ]
   },

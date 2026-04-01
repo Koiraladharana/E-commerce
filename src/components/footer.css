@@ -1,0 +1,20 @@
+.footer{
+    margin-top: 200px;
+}
+.footerDiv{
+    display: flex;
+}
+.footerLogo{
+   font-family: "Bebas Neue", sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+.footerLogo span{
+    color: var(--red);
+}
+.footer-socials{
+    gap: 5px;
+    display: flex;
+
+}
