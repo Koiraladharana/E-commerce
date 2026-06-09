@@ -105,23 +105,46 @@
     gap: 25px;
 }
 .carouselBtn{
-   width: 140px;
-   height: 36px;   
+   width: 150px;
+   height: 49px;   
    border-radius: 8px; 
    z-index: 100;
    border: 1px solid black;
    background-color: var(--gold);
 }
+.carouselBtn span{
+    font-size: small;
+    font-weight: bold;
+}
 .carouselSave{
     width: 120px;
-   height: 36px; 
+   height: 49px; 
    border-radius: 8px; 
    border: 1px solid gray;
     z-index: 10;
     color: white;
     background-color: var(--card);
 }
-
+.carousel-last-btn{
+    display:flex;
+    gap: 15px;       
+    z-index: 10;
+    width: 100%;     
+    margin-top: 30px;
+}
+.end-btn{
+    border:1px solid black;
+    background-color: #181818;
+    width: 150px;
+    height: 46px;
+    border-radius: 30px;
+}
+.end-btn span{
+    font-size: medium;
+}
+.carousel-last-btn p{
+    color: #888888;
+}
 @media (max-width: 768px) {
     .main-Carousel-card { padding: 0 20px 40px 20px; }
     .movieTitle { font-size: 2.5rem; }

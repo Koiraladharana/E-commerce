@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 
 
 export default function Carousel() {
-  const API_KEY = "5a98b5ca6bc67580f4a130fe6268e609";
+  const API_KEY = import.meta.env.VITE_API_KEY;
   const [loading, setLoading]= useState(false);
   const [movies, setMovies]= useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const [activeTab, setActiveTab] = useState('trending');
 
   async function movieCarouselFetch(){
     setLoading(true);
@@ -18,7 +20,7 @@ export default function Carousel() {
       }
       const data = await response.json();
       console.log(data);
-      setMovies(data.results.slice(0, 5));
+      setMovies(data.results.slice(0, 6));
     }
     catch(error){
       console.log(error);
@@ -61,8 +63,13 @@ export default function Carousel() {
                    </div>
                     <div className='movieDesc'>{movies[currentSlide].overview}</div>
                     <div className='emojiFlex'>
-                      <button className='carouselBtn'>▶ View Details</button>
-                      <button className='carouselSave'>🤍 Save</button>
+                      <button className='carouselBtn'><span>▶View Details</span></button>
+                      <button className='carouselSave'><span>🤍</span> Save</button>
+                    </div>
+                    <div className='carousel-last-btn'>
+                      <button className='end-btn'><span>🔥</span><p>TRENDING</p></button>
+                      <button className='end-btn'><span>⭐</span><p>Top Rated</p></button>
+                      <button className='end-btn'><span>🎬</span><p>upcoming</p></button>
                     </div>
                 </div>
         )}
