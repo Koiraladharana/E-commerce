@@ -57,7 +57,7 @@
 }
 .fireEmoji, .movieTitle, .starFlex, .movieDesc, .carouselBtn {
     z-index: 10;
-    margin-bottom: 12px; 
+    margin-bottom: 10px;
 }
 
 .fireEmoji {
@@ -145,9 +145,24 @@
 .carousel-last-btn p{
     color: #888888;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .main-Carousel-card { padding: 0 20px 40px 20px; }
-    .movieTitle { font-size: 2.5rem; }
-    .desktop-image { display: none; }
-    .mobile-image { display: block; }
+    .movieTitle { font-size: 3rem; }
+    .end-btn{
+    width: 170px;
+    height: 60px;
+}
+    .end-btn p {  font-size:medium; }
+
+}
+@media (min-width: 1024px) {
+    .main-Carousel-card { padding: 0 30px 50px 30px; }
+    .movieTitle { font-size: 4rem; }
+    .end-btn{
+    width: 200px;
+    height: 60px;
+}
+    .end-btn span{  font-size:x-large; }
+    .end-btn p {  font-size:medium; }
+
 }
