@@ -1,0 +1,175 @@
+.card-section{
+    width:100%;
+    height:auto;
+    padding-top:10px;
+    background-color: #000;
+    overflow: hidden;
+    padding-left:50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+.active-heading{
+    color: var(--gold);
+    font-size:xx-large;
+    font-weight: bolder;
+}
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #333;
+}
+.movie-grid {
+    margin-top:20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+.movie-card {
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    aspect-ratio: 2/3;
+}
+.movie-card:hover {
+    transform: scale(1.04);
+}
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Modal */
+.modal-overlay {
+    padding-top: 30px;
+    height:auto;
+    padding-bottom: 30px;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-box {
+    background: #1a1a1a;
+    border-radius: 14px;
+    max-width: 580px;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+    color: white;
+     max-height: 90vh;        /* never taller than 90% of the screen */
+    overflow-y: auto;        /* scrollbar only appears when content exceeds that */
+    overscroll-behavior: contain;
+}
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 10;
+}
+.modal-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+.modal-info {
+    padding: 20px;
+}
+.modal-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+.modal-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+.modal-vote { color: #ffad19; font-weight: bold; }
+.modal-year, .modal-lang, .modal-votes {
+    background: #2a2a2a;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+.modal-desc {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.modal-fav-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--gold);
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .card-section { padding: 20px; }
+    .active-heading{
+    font-size:xx-large;
+    font-weight: bold;
+}
+ .modal-info h2 {
+    font-size:3rem;
+}
+.modal-desc{
+    font-size: 1.4rem;
+}
+.modal-fav-btn {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+.modal-overlay { padding-top:30px; padding-bottom: 30px;}
+}
+@media(max-width: 480px){
+    .card-section{
+        padding-left:20px;
+    }
+    .modal-desc{
+    font-size: 1.1rem;
+}
+    .active-heading{
+    font-size:large;
+    font-weight: bold;
+}
+ .modal-info h2 {
+    font-size:1.8rem;
+}
+.movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+.modal-overlay { padding-top:30px; padding-bottom: 30px;}
+}

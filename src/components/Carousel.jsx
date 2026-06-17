@@ -1,15 +1,12 @@
-import React from 'react'
 import './carousel.css'
 import { useEffect, useState } from 'react';
 
 
-export default function Carousel() {
+export default function Carousel({activeTab, setActiveTab}) {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [loading, setLoading]= useState(false);
   const [movies, setMovies]= useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const [activeTab, setActiveTab] = useState('trending');
 
   async function movieCarouselFetch(){
     setLoading(true);
@@ -67,9 +64,9 @@ export default function Carousel() {
                       <button className='carouselSave'><span>🤍</span> Save</button>
                     </div>
                     <div className='carousel-last-btn'>
-                      <button className='end-btn'><span>🔥</span><p>TRENDING</p></button>
-                      <button className='end-btn'><span>⭐</span><p>Top Rated</p></button>
-                      <button className='end-btn'><span>🎬</span><p>upcoming</p></button>
+                      <button className={activeTab === 'trending'? 'end-btn active':'end-btn'} onClick={()=>{setActiveTab('trending')}}><span>🔥</span><p>TRENDING</p></button>
+                      <button className={activeTab === 'topRated'? 'end-btn active':'end-btn'} onClick={()=> {setActiveTab('topRated')}}><span>⭐</span><p>Top Rated</p></button>
+                      <button className={activeTab === 'upcoming'? 'end-btn active':'end-btn'} onClick={()=>{setActiveTab('upcoming')}}><span>🎬</span><p>upcoming</p></button>
                     </div>
                 </div>
         )}

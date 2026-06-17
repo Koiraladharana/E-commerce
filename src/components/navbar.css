@@ -98,13 +98,13 @@
   height: 36px;
   padding: 0 1rem;
   border-radius: 8px;
-  background: var(--gold);
-  border: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gray);
   cursor: pointer;
   font-family: "DM Sans", sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--black);
   transition: 0.3s;
   white-space: nowrap;
 }
@@ -113,7 +113,25 @@
   color: inherit;
 }
 .nav-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+/* Desktop nav buttons active state */
+.nav-btn.active {
+ border-color: var(--gold);
+  color: var(--gold);
+}
+
+.nav-btn.fav-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Sidebar links active state */
+.sidebar-btn.active {
   background: var(--gold-dim);
+  color: var(--black);
+  font-weight: 600;
 }
 .nav-btn.fav-btn {
   background: transparent;
@@ -244,7 +262,7 @@
 
 
 /*  DESKTOP  */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .hamburger-menu {
     display: none;
   } 
@@ -259,7 +277,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 480px) {
   .navMain {
     padding: 0 2rem;
   }
