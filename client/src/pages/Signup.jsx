@@ -18,7 +18,7 @@ function Signup() {
     createPassword: "",
     confirmPassword: "",
   });
-  function onSubmitRegister(e) {
+  async function onSubmitRegister(e) {
     e.preventDefault();
     let errors = {
       name: "",
@@ -54,9 +54,9 @@ function Signup() {
     } else if (formValue.createPassword !== formValue.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
       isValue = false;
-    } else if(formValue.confirmPassword.length <= 5){
+    } else if (formValue.confirmPassword.length <= 5) {
       errors.confirmPassword = "Password must be more then 5 letters"
-      isValue= false;
+      isValue = false;
     }
     const termsChecked = document.getElementById("terms").checked;
     if (!termsChecked) {
@@ -68,126 +68,119 @@ function Signup() {
       return;
     }
 
-    
-    // taking existing or empty array of users from localStorage
-   const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    try {
+      const response = await fetch('https://moviefetch-bdcv.onrender.com/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formValue.name,
+          email: formValue.email,
+          phone: formValue.phone,
+          password: formValue.createPassword
+        }),
+      })
 
-   //add new user in localstorage
-   const newUser = {
-    name: formValue.name,
-    email: formValue.email,
-    phone: formValue.phone,
-    password: formValue.createPassword,
-   }
+      const data = await response.json();
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
 
-   const emailExists = existingUsers.some(
-    (user)=>user.email === newUser.email
-   );
- 
-   if(emailExists){
-    alert("Email already registered!");
-    return;
-   }
-
-   existingUsers.push(newUser);
-   localStorage.setItem("users",JSON.stringify(existingUsers));
-
-   alert("Account created successfully!")
-    setFormValue({
-       name: "",
-    email: "",
-    phone: "",
-    createPassword: "",
-    confirmPassword: "",
-    });
-    navigate("/login");
+      alert("Account created successfully");
+      setFormValue({ name: '', email: '', phone: '', createPassword: '', confirmPassword: '' });
+      navigate('/login')
+    }
+    catch (error) {
+      alert('Something went wrong.Try again.')
+    }
   }
+
   return (
-  <form onSubmit={onSubmitRegister}>
-    <div className="signupDiv">
-      <div className="signup-form">
+    <form onSubmit={onSubmitRegister}>
+      <div className="signupDiv">
+        <div className="signup-form">
 
-        <div className="formLink">
-          <Link to="/">Movie<span>Fetch</span></Link>
+          <div className="formLink">
+            <Link to="/">Movie<span>Fetch</span></Link>
+          </div>
+          <p className="pDiv">Create your account to get started.</p>
+
+          <div className="form-group">
+            <input
+              type="text"
+              id="name"
+              className={formError.name ? "errorInput" : ""}
+              value={formValue.name}
+              onChange={(e) => setFormValue({ ...formValue, name: e.target.value })}
+              placeholder="Full Name"
+            />
+            {formError.name && <p className="errorDiv">{formError.name}</p>}
+          </div>
+
+          <div className="form-group">
+            <input
+              type="email"
+              id="email"
+              className={formError.email ? "errorInput" : ""}
+              value={formValue.email}
+              onChange={(e) => setFormValue({ ...formValue, email: e.target.value })}
+              placeholder="Email Address"
+            />
+            {formError.email && <p className="errorDiv">{formError.email}</p>}
+          </div>
+
+          <div className="form-group">
+            <input
+              type="tel"
+              id="num"
+              className={formError.phone ? "errorInput" : ""}
+              value={formValue.phone}
+              onChange={(e) => setFormValue({ ...formValue, phone: e.target.value })}
+              placeholder="Phone Number (98xxxxxxxx)"
+            />
+            {formError.phone && <p className="errorDiv">{formError.phone}</p>}
+          </div>
+
+          <div className="form-group">
+            <input
+              type="password"
+              id="password"
+              className={formError.createPassword ? "errorInput" : ""}
+              value={formValue.createPassword}
+              onChange={(e) => setFormValue({ ...formValue, createPassword: e.target.value })}
+              placeholder="Create Password"
+            />
+            {formError.createPassword && <p className="errorDiv">{formError.createPassword}</p>}
+          </div>
+
+          <div className="form-group">
+            <input
+              type="password"
+              id="confirm_password"
+              className={formError.confirmPassword ? "errorInput" : ""}
+              value={formValue.confirmPassword}
+              onChange={(e) => setFormValue({ ...formValue, confirmPassword: e.target.value })}
+              placeholder="Confirm Password"
+            />
+            {formError.confirmPassword && <p className="errorDiv">{formError.confirmPassword}</p>}
+          </div>
+
+          <div className="checkbox-group">
+            <input type="checkbox" id="terms" />
+            <label htmlFor="terms">I agree to the terms and privacy policy</label>
+            {formError.terms && <p className="errorDiv">{formError.terms}</p>}
+          </div>
+
+          <button type="submit" className="signup-btn">Create an Account</button>
+
+          <div className="signupLink">
+            Already have an account? <Link to="/login">Sign In</Link>
+          </div>
+
         </div>
-        <p className="pDiv">Create your account to get started.</p>
-
-        <div className="form-group">
-          <input
-            type="text"
-            id="name"
-            className={formError.name ? "errorInput" : ""}
-            value={formValue.name}
-            onChange={(e) => setFormValue({ ...formValue, name: e.target.value })}
-            placeholder="Full Name"
-          />
-          {formError.name && <p className="errorDiv">{formError.name}</p>}
-        </div>
-
-        <div className="form-group">
-          <input
-            type="email"
-            id="email"
-            className={formError.email ? "errorInput" : ""}
-            value={formValue.email}
-            onChange={(e) => setFormValue({ ...formValue, email: e.target.value })}
-            placeholder="Email Address"
-          />
-          {formError.email && <p className="errorDiv">{formError.email}</p>}
-        </div>
-
-        <div className="form-group">
-          <input
-            type="tel"
-            id="num"
-            className={formError.phone ? "errorInput" : ""}
-            value={formValue.phone}
-            onChange={(e) => setFormValue({ ...formValue, phone: e.target.value })}
-            placeholder="Phone Number (98xxxxxxxx)"
-          />
-          {formError.phone && <p className="errorDiv">{formError.phone}</p>}
-        </div>
-
-        <div className="form-group">
-          <input
-            type="password"
-            id="password"
-            className={formError.createPassword ? "errorInput" : ""}
-            value={formValue.createPassword}
-            onChange={(e) => setFormValue({ ...formValue, createPassword: e.target.value })}
-            placeholder="Create Password"
-          />
-          {formError.createPassword && <p className="errorDiv">{formError.createPassword}</p>}
-        </div>
-
-        <div className="form-group">
-          <input
-            type="password"
-            id="confirm_password"
-            className={formError.confirmPassword ? "errorInput" : ""}
-            value={formValue.confirmPassword}
-            onChange={(e) => setFormValue({ ...formValue, confirmPassword: e.target.value })}
-            placeholder="Confirm Password"
-          />
-          {formError.confirmPassword && <p className="errorDiv">{formError.confirmPassword}</p>}
-        </div>
-
-        <div className="checkbox-group">
-          <input type="checkbox" id="terms" />
-          <label htmlFor="terms">I agree to the terms and privacy policy</label>
-          {formError.terms && <p className="errorDiv">{formError.terms}</p>}
-        </div>
-
-        <button type="submit" className="signup-btn">Create an Account</button>
-
-        <div className="signupLink">
-          Already have an account? <Link to="/login">Sign In</Link>
-        </div>
-
       </div>
-    </div>
-  </form>
-);
+    </form>
+  );
 }
 
 export default Signup;
