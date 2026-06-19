@@ -43,7 +43,7 @@ function Login() {
     }
 
     try{
-      const response = await fetch('https://5000-cs-473132266018-default.cs-asia-southeast1-yelo.cloudshell.dev/api/auth/login', {
+      const response = await fetch('https://moviefetch-bdcv.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
