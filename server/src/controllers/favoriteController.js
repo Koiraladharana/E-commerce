@@ -3,7 +3,7 @@ import Favorite from '../models/favoriteModel.js';
 //GET all favorites of logged in member
 export const getFavorites = async (req, res) => {
     try{
-        const favorites = await Favorite.find({ userId: req.user._id });
+        const favorites = await Favorite.find({ userId: req.user.id });
         res.json(favorites);
     }
     catch (error) {
@@ -16,13 +16,13 @@ export const addFavorite = async (req, res) => {
     try{
         const { movieId, title, poster_path, rating } = req.body;
 
-        const alreadyAdded = await Favorite.findOne({ userId: req.user._id, movieId });
+        const alreadyAdded = await Favorite.findOne({ userId: req.user.id, movieId });
         if(alreadyAdded){
             return res.status(400).json({ message: 'Movie already added' });
         }
 
         const favorite = await Favorite.create({
-            userId: req.user._id,
+            userId: req.user.id,
             movieId,
             title,
             poster_path,
@@ -40,7 +40,7 @@ export const addFavorite = async (req, res) => {
 export const removeFavorite = async ( req, res ) => {
     try{
         await Favorite.findOneAndDelete({ 
-            userId: req.user._id,
+            userId: req.user.id,
             movieId: Number(req.params.movieId)
         });
         res.json({ message: 'Removed from favorites'})
