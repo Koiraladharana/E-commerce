@@ -1,14 +1,16 @@
 import './card.css'
 import { useEffect, useState } from 'react';
 
-function Card({activeTab, setActiveTab}) {
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://moviefetch-bdcv.onrender.com';
+
+function Card({activeTab, setActiveTab, favorites, setFavorites}) {
     const API_KEY = import.meta.env.VITE_API_KEY;
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
-
+    const [favLoading, setFavLoading] = useState(false);
 
     async function fetchAll() {
         setLoading(true);
@@ -37,7 +39,6 @@ function Card({activeTab, setActiveTab}) {
             setTopRated(dataTopRated.results);
             setUpcoming(dataUpcoming.results);
         }
-
         catch (error) {
             console.log(error);
         }
@@ -49,6 +50,46 @@ function Card({activeTab, setActiveTab}) {
     useEffect(() => {
         fetchAll();
     }, []);
+
+    // NEW: check if movie is already in favorites
+    const isFavorited = (movieId) => favorites.some(f => f.movieId === movieId);
+
+    // NEW: add or remove from favorites
+    async function handleFavoriteToggle(movie) {
+        const token = localStorage.getItem('token');
+        if (!token) { alert('Please log in to add favorites.'); return; }
+
+        setFavLoading(true);
+        try {
+            if (isFavorited(movie.id)) {
+                await fetch(`${API_BASE}/api/favorites/${movie.id}`, {
+                    method: 'DELETE',
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setFavorites(prev => prev.filter(f => f.movieId !== movie.id));
+            } else {
+                const res = await fetch(`${API_BASE}/api/favorites`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        movieId: movie.id,
+                        title: movie.title,
+                        poster_path: movie.poster_path,
+                        rating: movie.vote_average,
+                    }),
+                });
+                const saved = await res.json();
+                setFavorites(prev => [...prev, saved]);
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setFavLoading(false);
+        }
+    }
 
     const movies = activeTab === 'trending' ? trending : activeTab === 'topRated' ? topRated : upcoming;
     const tabLabel = activeTab === 'trending' ? 'TRENDING' : activeTab === 'topRated' ? 'TOP RATED' : 'UPCOMING';
@@ -85,7 +126,20 @@ function Card({activeTab, setActiveTab}) {
                 <span className='modal-votes'>🗳 {selectedMovie.vote_count} votes</span>
               </div>
               <p className='modal-desc'>{selectedMovie.overview}</p>
-              <button className='modal-fav-btn'>♥ Add to Favorites</button>
+
+              {/* NEW: button changes based on favorite status */}
+              <button
+                className='modal-fav-btn'
+                disabled={favLoading}
+                onClick={() => handleFavoriteToggle(selectedMovie)}
+                style={isFavorited(selectedMovie.id) ? {
+                    backgroundColor: '#c0392b',
+                    color: 'white',
+                    border: '2px solid #c0392b',
+                } : {}}
+              >
+                {isFavorited(selectedMovie.id) ? '💔 Remove from Favorites' : '♥ Add to Favorites'}
+              </button>
             </div>
           </div>
         </div>

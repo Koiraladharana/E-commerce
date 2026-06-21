@@ -1,29 +1,25 @@
 .favorite-section {
-    width: 100vw;
+    width: 100%;
     height: auto;
+    padding-top: 10px;
     background-color: #000;
-    padding-top: 120px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 20px
+    overflow: hidden;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
 }
 
-.favorite-heading {
-    font-size: x-large;
-    font-weight: bolder ;
-    font-family: Arial, Helvetica, sans-serif;
-    color:white;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.empty-msg {
+    color: #aaa;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    text-align: center;
 }
-.favorite-heading::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background-color: #333;
+
+@media (max-width: 1024px) {
+    .favorite-section { padding: 20px; }
 }
-.favorite-span{
-    color: var(--gold);
-}
+
+@media (max-width: 480px) {
+    .favorite-section { padding-left: 20px; }
 }

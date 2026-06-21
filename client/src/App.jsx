@@ -4,20 +4,21 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { Children } from "react";
 import Favorites from "./pages/Favorites";
-import Footer from "./components/Footer";
+import { useState } from "react";
 
-const router = createBrowserRouter([
+function App(){
+  const [favorites, setFavorites] = useState([]);
+  const router = createBrowserRouter([
   {
     element: <Layout />,
     children:[{
         path: "/",
-        element: <Home />
+        element: <Home favorites={favorites} setFavorites={setFavorites} />
     },
     {
       path: "/favorites",
-      element: <Favorites />
+      element: <Favorites favorites={favorites} setFavorites={setFavorites} />
     },
   ]
   },
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   {path: "login", element:<Login />},
   {path: "*", element:<>Page Not Found</>},
 ]);
-function App(){
+
     return <RouterProvider router={router} />;
 }
 
