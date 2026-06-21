@@ -1,6 +1,6 @@
 .favorite-section {
     width: 100%;
-    height: auto;
+    min-height: 80vh;    
     padding-top: 10px;
     background-color: #000;
     overflow: hidden;
@@ -17,9 +17,9 @@
 }
 
 @media (max-width: 1024px) {
-    .favorite-section { padding: 20px; }
+    .favorite-section { padding: 20px; min-height: 80vh; }
 }
 
 @media (max-width: 480px) {
-    .favorite-section { padding-left: 20px; }
+    .favorite-section { padding-left: 20px; min-height: 80vh; }
 }
