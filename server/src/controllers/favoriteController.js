@@ -3,7 +3,7 @@ import Favorite from '../models/favoriteModel.js';
 //GET all favorites of logged in member
 export const getFavorites = async (req, res) => {
     try{
-        const favorites = await Favorite.find({ userID: req.user._id });
+        const favorites = await Favorite.find({ userId: req.user._id });
         res.json(favorites);
     }
     catch (error) {
