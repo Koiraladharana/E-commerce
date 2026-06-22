@@ -10,8 +10,8 @@
 /* Top Section */
 .footer-top {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
-    gap: 230px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
     padding-bottom: 40px;
     border-bottom: 1px solid #222;
 }
@@ -120,11 +120,11 @@
 /* Mobile: ≤ 480px */
 @media (max-width: 480px) {
     .footer {
-        padding: 40px 20px 0 20px;
+        padding: 40px 16px 0 16px;
     }
     .footer-top {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
     }
     .footer-bottom {
         flex-direction: column;

@@ -57,7 +57,7 @@ function Card({activeTab, setActiveTab, favorites, setFavorites}) {
     // NEW: add or remove from favorites
     async function handleFavoriteToggle(movie) {
         const token = localStorage.getItem('token');
-        if (!token) { alert('Please log in to add favorites.'); return; }
+        if (!token) {  window.location.href = '/login'; return;  }
 
         setFavLoading(true);
         try {

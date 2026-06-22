@@ -9,11 +9,13 @@ function Favorites({ favorites, setFavorites }) {
     const [favLoading, setFavLoading] = useState(false);
     const [detailLoading, setDetailLoading] = useState(false);
 
-    // Load favorites from backend when page opens
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/login';
+            return;
+        }
         async function loadFavorites() {
-            const token = localStorage.getItem('token');
-            if (!token) return;
             try {
                 const res = await fetch(`${API_BASE}/api/favorites`, {
                     headers: { Authorization: `Bearer ${token}` },
@@ -27,7 +29,6 @@ function Favorites({ favorites, setFavorites }) {
         loadFavorites();
     }, []);
 
-    // Fetch full movie details from TMDB when card is clicked
     async function handleCardClick(fav) {
         setDetailLoading(true);
         try {
@@ -82,7 +83,6 @@ function Favorites({ favorites, setFavorites }) {
                 </div>
             )}
 
-            {/* Loading spinner while fetching details */}
             {detailLoading && (
                 <div className='modal-overlay'>
                     <p style={{ color: 'white', fontSize: '1.2rem' }}>Loading...</p>
@@ -107,8 +107,6 @@ function Favorites({ favorites, setFavorites }) {
                                 <span className='modal-votes'>🗳 {selectedMovie.vote_count} votes</span>
                             </div>
                             <p className='modal-desc'>{selectedMovie.overview}</p>
-
-                            {/* Red broken heart remove button */}
                             <button
                                 className='modal-fav-btn'
                                 disabled={favLoading}
