@@ -19,7 +19,7 @@
 }
 
 .active-heading {
-    color: white;
+    color: var(--gold);
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -69,12 +69,12 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-    .favorite-section { padding: 30px 20px 20px; }
+    .favorite-section { padding: 80px 20px 20px; }
     .movie-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 
 @media (max-width: 480px) {
-    .favorite-section { padding: 20px 16px 20px; }
+    .favorite-section { padding: 80px 16px 20px; }
     .active-heading { font-size: 0.95rem; }
     .movie-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
 }
