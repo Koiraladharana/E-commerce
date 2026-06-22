@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'https://moviefetch-bdcv.onrender.com';
 
-function Card({activeTab, setActiveTab, favorites, setFavorites}) {
+function Card({activeTab, setActiveTab, favorites, setFavorites, searchQuery }) {
     const API_KEY = import.meta.env.VITE_API_KEY;
     const [trending, setTrending] = useState([]);
     const [topRated, setTopRated] = useState([]);
@@ -11,6 +11,7 @@ function Card({activeTab, setActiveTab, favorites, setFavorites}) {
     const [loading, setLoading] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [favLoading, setFavLoading] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
 
     async function fetchAll() {
         setLoading(true);
@@ -91,8 +92,43 @@ function Card({activeTab, setActiveTab, favorites, setFavorites}) {
         }
     }
 
-    const movies = activeTab === 'trending' ? trending : activeTab === 'topRated' ? topRated : upcoming;
-    const tabLabel = activeTab === 'trending' ? 'TRENDING' : activeTab === 'topRated' ? 'TOP RATED' : 'UPCOMING';
+    useEffect(() => {
+        if (!searchQuery || searchQuery.trim() === '') {
+            setSearchResults([]);
+            return;
+        }
+        async function doSearch() {
+            setLoading(true);
+            try {
+                const res = await fetch(
+                    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchQuery)}`
+                );
+                const data = await res.json();
+                setSearchResults(data.results);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        // debounce — wait 400ms after user stops typing
+        const timer = setTimeout(doSearch, 400);
+        return () => clearTimeout(timer);
+    }, [searchQuery]);
+
+    // decide which movies to show
+    const isSearching = searchQuery && searchQuery.trim() !== '';
+    const movies = isSearching
+        ? searchResults
+        : activeTab === 'trending' ? trending
+        : activeTab === 'topRated' ? topRated
+        : upcoming;
+
+    const tabLabel = isSearching
+        ? `RESULTS FOR "${searchQuery.toUpperCase()}"`
+        : activeTab === 'trending' ? 'TRENDING'
+        : activeTab === 'topRated' ? 'TOP RATED'
+        : 'UPCOMING';
 
     return (
         <div className='card-section'>

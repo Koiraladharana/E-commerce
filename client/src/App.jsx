@@ -9,12 +9,14 @@ import { useState } from "react";
 
 function App(){
   const [favorites, setFavorites] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <Layout setFavorites={setFavorites} setSearchQuery={setSearchQuery} />,
     children:[{
         path: "/",
-        element: <Home favorites={favorites} setFavorites={setFavorites} />
+        element: <Home favorites={favorites} setFavorites={setFavorites} searchQuery={searchQuery} />
     },
     {
       path: "/favorites",

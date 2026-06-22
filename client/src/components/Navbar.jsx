@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./navbar.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-function Navbar({ setFavorites }) {
+function Navbar({ setFavorites, setSearchQuery }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,6 +18,12 @@ function Navbar({ setFavorites }) {
     setMenuOpen(false);
   };
 
+  function handleSearch(e) {
+    const value = e.target.value;
+    setSearchQuery(value);
+    navigate('/');  // always search on home page
+  }
+
   return (
     <>
       <nav className="navMain">
@@ -28,7 +34,7 @@ function Navbar({ setFavorites }) {
         <div className="navDiv">
           <div className="searchBar">
             <span className="search-icon">🔍</span>
-            <input className="search-input" placeholder="Search movies..." />
+            <input className="search-input" placeholder="Search movies..." onChange={handleSearch} />
           </div>
 
           {/* DESKTOP */}
@@ -74,7 +80,7 @@ function Navbar({ setFavorites }) {
           <>
             <Link to="/" className={`sidebar-btn ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>🏠 Home</Link>
             <Link to="/favorites" className={`sidebar-btn ${location.pathname === '/favorites' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>❤️ Favorites</Link>
-            <button className="sidebar-btn" onClick={handleLogout}>🚪 Sign Out</button>
+            <Link to="/login" className={ `sidebar-btn ${location.pathname === '/login' ? 'active' : ''}`} onClick={handleLogout}>🚪 Sign Out</Link>
           </>
         ) : (
           <>
