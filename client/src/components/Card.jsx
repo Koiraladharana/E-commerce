@@ -128,18 +128,18 @@ function Card({activeTab, setActiveTab, favorites, setFavorites}) {
               <p className='modal-desc'>{selectedMovie.overview}</p>
 
               {/* NEW: button changes based on favorite status */}
-              <button
-                className='modal-fav-btn'
-                disabled={favLoading}
-                onClick={() => handleFavoriteToggle(selectedMovie)}
-                style={isFavorited(selectedMovie.id) ? {
-                    backgroundColor: '#c0392b',
-                    color: 'white',
-                    border: '2px solid #c0392b',
-                } : {}}
-              >
-                {isFavorited(selectedMovie.id) ? '💔 Remove from Favorites' : '♥ Add to Favorites'}
-              </button>
+             <button
+  className='modal-fav-btn'
+  disabled={favLoading}
+  onClick={() => handleFavoriteToggle(selectedMovie)}
+  style={localStorage.getItem('token') && isFavorited(selectedMovie.id) ? {
+      backgroundColor: '#c0392b',
+      color: 'white',
+      border: '2px solid #c0392b',
+  } : {}}
+>
+  {localStorage.getItem('token') && isFavorited(selectedMovie.id) ? '💔 Remove from Favorites' : '♥ Add to Favorites'}
+</button>
             </div>
           </div>
         </div>

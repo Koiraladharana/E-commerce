@@ -1,7 +1,7 @@
 .favorite-section {
     width: 100%;
     min-height: 80vh;    
-    padding-top: 30px;
+    padding-top: 90px;  /* ← was 30px, increase to clear your fixed navbar */
     background-color: #000;
     overflow: hidden;
     padding-left: 50px;

@@ -1,16 +1,19 @@
 import { useState } from "react";
 import "./navbar.css";
-import { Link, useNavigate, useLocation } from "react-router-dom"; // ← add useLocation
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ setFavorites }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // ← add this
+  const location = useLocation();
 
+  const isLoggedIn = !!localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+    setFavorites([]);
     navigate("/");
     setMenuOpen(false);
   };
@@ -31,9 +34,9 @@ function Navbar() {
           {/* DESKTOP */}
           <div className="nav-desktop">
             <div className="nav-user">
-              {user ? <>Hi, <span>{user?.name}</span></> : <></>}
+              {isLoggedIn && user ? <>Hi, <span>{user?.name}</span></> : <></>}
             </div>
-            {user ? (
+            {isLoggedIn ? (
               <>
                 <button className={`nav-btn ${location.pathname === '/' ? 'active' : ''}`}>
                   <Link to="/">🏠 Home</Link>
@@ -64,10 +67,10 @@ function Navbar() {
       <div className={`sidebar ${menuOpen ? "sidebar-open" : ""}`}>
         <button className="sidebar-close" onClick={() => setMenuOpen(false)}>✕</button>
         <div className="sidebar-user">
-          {user ? <>Hi, <span>{user?.name}</span></> : "Welcome"}
+          {isLoggedIn && user ? <>Hi, <span>{user?.name}</span></> : "Welcome"}
         </div>
         <hr className="sidebar-divider" />
-        {user ? (
+        {isLoggedIn ? (
           <>
             <Link to="/" className={`sidebar-btn ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>🏠 Home</Link>
             <Link to="/favorites" className={`sidebar-btn ${location.pathname === '/favorites' ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>❤️ Favorites</Link>
